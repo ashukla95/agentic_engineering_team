@@ -19,7 +19,7 @@ def run():
     """
     inputs = {
         "product_name": "trading platform",
-        "competitior_name": "robinhood"
+        "competitor_product_name": "robinhood"
     }
     
     try:
