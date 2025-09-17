@@ -1,17 +1,46 @@
-research_task:
+business_usecase_generation_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Give a business use case that you want to be added to your product.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A concise paragraph detailing what eactly is the feature to be added in 
+    the product. 
+    Specifics if any, should be clearly called out.
+    Important facts and conditions should be mentioned immediate.
+    Your output should be a text and not a mar=kdown.
+  agent:  business_personal
 
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
-  expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+
+technical_breakdown_task:
+  description:  >
+    Breakdown the details provided by the business_personal
+    into technical tasks that can be understood by the
+    software_engineer agent. A simple example to understand 
+    would be, let's say you are a data-backed education company,
+    the business_personal comes and says, I want a student report
+    to be generated using data from Canvas. The report should include
+    student, course, enrollment, assignment and login details.\
+    A simple breakdown here would be:
+    1) Develop and ingestion mechanism to get details from Canvas.
+    2) Ingest data into Canvas
+    3) Develop the sql query to combine all of the needed details.
+    4) Generate the report.
+    Now, if you carefully observe, the above mentioned steps are still 
+    quite high level but all I want is to give you an essence of what it
+    would look like. You task is to generate such technical tasks which
+    are concise, idempotent and easily developable and testable.
+  expected_output:  >
+    A set of technical tasks to be worked on by the engineering team.
+    The tas should have title and description of exact feature development.
+  agent:  technical_manager
+
+
+software_engineer_task:
+  description:  >
+  expected_output:  >
+  agent:  software_engineer
+
+
+software_test_task:
+  description:  >
+  expected_output:  >
+  agent:  software_tester
