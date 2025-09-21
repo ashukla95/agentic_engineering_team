@@ -1,56 +1,23 @@
-# {{crew_name}} Crew
+# Software Engineer Team
 
-Welcome to the {{crew_name}} Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+I have implemented a software engineer team using CREWAI Flows. This team consists of 
+one business personal, one technical manager, 1 software engineer and 1 tech lead agents.
+It has a self eval loop between business personal and tech manager wherein tech manager 
+upto 3 times can ask clarifications.
+Tech manager then creates task for software engineer to develop.
+Software engineer once done with code generation passes the code to the tech lead to review.
+Tech lead upto 3 times can ask software engineer to do code improvements.
+Agents used:
+gpt-4o-mini     - business personal
+gpt-40          - tech manager
+claude-sonnet-4 - software engineer / tech lead
 
-## Installation
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
-
-First, if you haven't already, install uv:
-
-```bash
-pip install uv
-```
-
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/eng_team_flow/config/agents.yaml` to define your agents
-- Modify `src/eng_team_flow/config/tasks.yaml` to define your tasks
-- Modify `src/eng_team_flow/crew.py` to add your own logic, tools and specific args
-- Modify `src/eng_team_flow/main.py` to add custom inputs for your agents and tasks
-
-## Running the Project
-
-To kickstart your flow and begin execution, run this from the root folder of your project:
-
-```bash
-crewai run
-```
-
-This command initializes the eng_team_flow Flow as defined in your configuration.
-
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
-
-## Understanding Your Crew
-
-The eng_team_flow Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the {{crew_name}} Crew or crewAI.
-
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+Challenges:
+* Even after good enough prompt hallucinations are witnessed.
+* Engineering tasks can at time show up to be very length contextually even though LLM shows it as it very quick to implement.
+* CrewAI itself is slow to initiate.
+* The output on the console is very decent.
+* Crew is difficult to initiate with but once you get the flow, its fun and still has problems with hardcoded requirements in the framework itself.
+* Output from LLM is curbed at times - this is one thing I am trying to fix.
+* I have used state to save and use generated output. But, I believe memory will be a better option - Need to explore this as well.
