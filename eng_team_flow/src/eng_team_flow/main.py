@@ -23,13 +23,8 @@ class EngTeamState(BaseModel):
 
 class EngTeamFlow(Flow[EngTeamState]):
     
-    @start()
-    def print_start_task(self):
-        print("Initiating flow.")
-        print("This is being added to see how it works.")
-
-    @listen(print_start_task)
-    @listen(
+    
+    @start(
         "provide_more_clarity"
     )
     def generate_business_usecase(self):
@@ -83,7 +78,7 @@ class EngTeamFlow(Flow[EngTeamState]):
             )
             result = (
                 SoftwareEngineer(
-                    output_file_name=f"{agent_output}/{tasks_detail['task_name']}"
+                    output_file_name=f"agent_output/{tasks_detail.task_name}.py"
                 )
                 .crew()
                 .kickoff()

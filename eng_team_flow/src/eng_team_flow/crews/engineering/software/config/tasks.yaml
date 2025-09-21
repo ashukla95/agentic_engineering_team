@@ -5,6 +5,8 @@ generate_code:
     Generate code for the input task provided.
     Follow the best practices in software design and
     provide code that is modular and testable.
+    The final output code should be a gradio
+    app and fully ready to use out of the box.
   expected_output:  >
     Python code that successfully satisfies the 
     requirements provided as a part of the task.

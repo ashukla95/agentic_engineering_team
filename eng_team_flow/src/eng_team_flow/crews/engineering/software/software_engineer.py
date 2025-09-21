@@ -44,7 +44,8 @@ class SoftwareEngineer:
         return Agent(
             config=self.agents_config[
                 "software_engineer"
-            ]
+            ],
+            allow_code_execution=True
         )
     
     @task
