@@ -21,3 +21,6 @@ Challenges:
 * Crew is difficult to initiate with but once you get the flow, its fun and still has problems with hardcoded requirements in the framework itself.
 * Output from LLM is curbed at times - this is one thing I am trying to fix.
 * I have used state to save and use generated output. But, I believe memory will be a better option - Need to explore this as well.
+
+<img width="1884" height="938" alt="image" src="https://github.com/user-attachments/assets/7569267a-eb28-4e57-a328-34951b567029" />
+
