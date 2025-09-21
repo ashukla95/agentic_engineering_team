@@ -26,54 +26,6 @@ class TechLeadReview(BaseModel):
 
 
 @CrewBase
-class SoftwareEngineer:
-    """Software Wngineer"""
-
-    agents: List[BaseAgent]
-    tasks: List[Task]
-    agents_config: "config/software_agent.yaml"
-    tasks_config: "config/software_task.yaml"
-
-    def __init__(
-        self,
-        output_file_name: str,
-        *args,
-        **kwargs
-    ):
-        super().__init__(
-            *args, **kwargs
-        )
-        self.output_file_name = output_file_name
-
-    @agent
-    def software_engineer(self) -> Agent:
-        return Agent(
-            config=self.agents_config[
-                "software_engineer"
-            ],
-            allow_code_execution=False
-        )
-    
-    @task
-    def generate_code(self) -> Task:
-        return Task(
-            config=self.tasks_config[
-                "generate_code"
-            ],
-            output_file=self.output_file_name
-        )
-
-    @crew
-    def crew(self) -> Crew:
-        return Crew(
-            agents=self.agents,
-            tasks=self.tasks,
-            process=Process.sequential,
-            verbose=True
-        )
-
-
-@CrewBase
 class TechLead:
     """Tech Lead"""
 

@@ -3,21 +3,27 @@ from random import randint
 
 from pydantic import BaseModel
 from typing import List
-from crewai.flow import Flow, listen, start, router
+from crewai.flow import Flow, listen, start, router, or_
 
 from eng_team_flow.crews.business.business_crew import BusinessCrew
 from eng_team_flow.crews.manager.technical.technical_manager import TechnicalManagerCrew
 from eng_team_flow.crews.engineering.software.software_engineer import (
     SoftwareEngineer
 )
+from eng_team_flow.crews.engineering.tech_lead.tech_lead import (
+    TechLead
+)
 
 
 class EngTeamState(BaseModel):
     business_technical_refinement_counter: int = 0
+    code_review_counter: int = 0
     business_use_case: str = ""
     provide_more_clarity: bool = False
     clarifications: str = ""
-    task_list: List[dict[str, str]] = None
+    final_task_details: str = None
+    final_code_generated: str = ""
+    corrections_needed: str = ""
 
 
 
@@ -66,17 +72,16 @@ class EngTeamFlow(Flow[EngTeamState]):
             )
             return "provide_more_clarity"
         print(f"type -> result tasks: {type(result['tasks'])}")
-        self.state.task_list = result["tasks"]
-        return "initiate_code"
-    
-    @listen("initiate_code")
-    def generate_code(self):
-        final_task_details = "\n\n".join(
+        self.state.final_task_details = "\n\n".join(
             [
-                f"{task_detail.task_name} \n\n {task_detail.task_description}" for task_detail in self.state.task_list
+                f"{task_detail.task_name} \n\n {task_detail.task_description}" for task_detail in result["tasks"]
             ]
         )
-        final_task_details = f"{self.state.business_use_case}\n\n{final_task_details}"
+        self.state.final_task_details = f"{self.state.business_use_case}\n\n{self.state.final_task_details}"
+        return "initiate_code"
+    
+    @listen(or_("initiate_code", "refactor_changes"))
+    def generate_code(self):
         result = (
             SoftwareEngineer(
                 output_file_name=f"agent_output/all_code.py"
@@ -84,10 +89,34 @@ class EngTeamFlow(Flow[EngTeamState]):
             .crew()
             .kickoff(
                 inputs={
-                    "task_details": final_task_details
+                    "task_details": f"{self.state.final_task_details}\n\n\n{self.state.corrections_needed}"
                 }
             )
-        )        
+        )
+        self.state.final_code_generated = result.raw
+        print("Resetting corrections needed.")
+        self.state.corrections_needed = ""
+        return "ready_to_review"
+
+    @router(generate_code)
+    def review_code(self):
+        result = (
+            TechLead()
+            .crew()
+            .kickoff(
+                inputs={
+                    "code": f"{self.state.final_task_details}\n\n{self.state.final_code_generated}"
+                }
+            )
+        )
+        if result["needs_correction"] and self.state.code_review_counter < 3:
+            self.state.corrections_needed = result["changes_to_be_made"]
+            self.state.code_review_counter += 1
+            return "refactor_changes"
+        if self.state.code_review_counter >= 3:
+            print("Code review limit reached. Hence, exiting.")
+        return "all set!"
+
     
 
 def kickoff():
