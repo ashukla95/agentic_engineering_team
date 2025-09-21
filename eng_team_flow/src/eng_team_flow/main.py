@@ -71,19 +71,23 @@ class EngTeamFlow(Flow[EngTeamState]):
     
     @listen("initiate_code")
     def generate_code(self):
-        for tasks_detail in self.state.task_list:
-            print(f"""
-                task: {tasks_detail.task_name}; detail: {tasks_detail.task_description}
-                """
+        final_task_details = "\n\n".join(
+            [
+                f"{task_detail.task_name} \n\n {task_detail.task_description}" for task_detail in self.state.task_list
+            ]
+        )
+        final_task_details = f"{self.state.business_use_case}\n\n{final_task_details}"
+        result = (
+            SoftwareEngineer(
+                output_file_name=f"agent_output/all_code.py"
             )
-            result = (
-                SoftwareEngineer(
-                    output_file_name=f"agent_output/{tasks_detail.task_name}.py"
-                )
-                .crew()
-                .kickoff()
+            .crew()
+            .kickoff(
+                inputs={
+                    "task_details": final_task_details
+                }
             )
-        pass
+        )        
     
 
 def kickoff():

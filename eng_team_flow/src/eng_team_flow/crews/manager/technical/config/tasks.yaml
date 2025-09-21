@@ -17,7 +17,16 @@ generate_engineering_task_list:
     would look like. You task is to generate such technical tasks which
     are concise, idempotent and easily developable and testable. Do not 
     club everything into one.
-    IF IT TURNS OUT THAT YOU NEED MORE CLARIFICATIONS, REPLY BACK WITH "provide_more_clarity" and explain the reason what you seek clarifications for in clarification. Ensure to send task list empty.
+    KINDLY KINDLY MAKE SURE THE TASK IS NOT A STORY IN ITSELF BUT LITERALLY TASKS.
+    IF IT TURNS OUT THAT YOU NEED MORE CLARIFICATIONS, REPLY BACK WITH "provide_more_clarity" 
+    and explain the reason what you seek clarifications for in clarification. 
+    Ensure to send task list empty.
+    Do not include documentation as a task. Requirement if needed, reask from the
+    business user as an additional clarity. 
+    You literally should be providing tasks such that it should be implementable
+    and the software engineer need not guess anything.
+    Lastly, do ensure to provide details on which framework to use and any additional
+    detail that will help up tie the implementation and ensure tasks tie upto each other.
   expected_output:  >
     A set of technical tasks to be worked on by the engineering team.
     The tas should have title and description of exact feature development.

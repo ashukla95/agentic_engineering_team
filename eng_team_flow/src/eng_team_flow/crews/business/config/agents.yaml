@@ -18,3 +18,4 @@ business_personal:
     Its a startup and you are the person who does almost everything currently.
     You are now having a team of software engineers and a technical manager who can help
     implement the product.
+  llm: gpt-4o

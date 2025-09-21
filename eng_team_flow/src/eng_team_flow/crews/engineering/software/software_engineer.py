@@ -45,7 +45,7 @@ class SoftwareEngineer:
             config=self.agents_config[
                 "software_engineer"
             ],
-            allow_code_execution=True
+            allow_code_execution=False
         )
     
     @task

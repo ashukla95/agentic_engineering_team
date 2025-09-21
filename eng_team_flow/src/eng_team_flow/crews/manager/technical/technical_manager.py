@@ -28,6 +28,7 @@ class EngineeringDesignTaskList(BaseModel):
     tasks: list[EngineeringDesignTask]
     provide_more_clarity: str = ""
     clarification_query: str = ""
+    additional_implementation_details: str = ""
 
 
 @CrewBase

@@ -15,3 +15,4 @@ technical_manager:
     and translate it into technical requirements so that your team can work on it accordingly to
     implement. You know how to understand the overall goal and how it would translate to the
     requirements of the product.
+  llm: gpt-4o-mini
