@@ -8,7 +8,7 @@ business_usecase_generation_task:
     the product. 
     Specifics if any, should be clearly called out.
     Important facts and conditions should be mentioned immediate.
-    Your output should be a text and not a mar=kdown.
+    Your output should be a text and not a markdown.
   agent:  business_personal
   output_file: agent_output/business_usecase_generation_task.json
 

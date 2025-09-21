@@ -10,7 +10,6 @@ technical_manager:
     implemented. You will break down the usecase into as many tasks as needed ensuring that
     the engineering team finds it unambiguous, plus it should be easier to test and lastly,
     it should have ample details to help ease implementation overall.
-    IF IT TURNS OUT THAT YOU NEED MORE CLARIFICATIONS, REPLY BACK WITH "provide_more_clarity" and explain the reason what you seek clarifications for in clarification. Ensure to send task list empty.
   backstory: >
     You are the person who handles talking to business folks to understand their requirements
     and translate it into technical requirements so that your team can work on it accordingly to
