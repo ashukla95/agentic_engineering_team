@@ -2,11 +2,14 @@
 from random import randint
 
 from pydantic import BaseModel
-
+from typing import List
 from crewai.flow import Flow, listen, start, router
 
 from eng_team_flow.crews.business.business_crew import BusinessCrew
 from eng_team_flow.crews.manager.technical.technical_manager import TechnicalManagerCrew
+from eng_team_flow.crews.engineering.software.software_engineer import (
+    SoftwareEngineer
+)
 
 
 class EngTeamState(BaseModel):
@@ -14,6 +17,7 @@ class EngTeamState(BaseModel):
     business_use_case: str = ""
     provide_more_clarity: bool = False
     clarifications: str = ""
+    task_list: List[dict[str, str]] = None
 
 
 
@@ -66,7 +70,25 @@ class EngTeamFlow(Flow[EngTeamState]):
                 f"business refinement_counter now is: {self.state.business_technical_refinement_counter}"
             )
             return "provide_more_clarity"
+        print(f"type -> result tasks: {type(result['tasks'])}")
+        self.state.task_list = result["tasks"]
         return "initiate_code"
+    
+    @listen("initiate_code")
+    def generate_code(self):
+        for tasks_detail in self.state.task_list:
+            print(f"""
+                task: {tasks_detail.task_name}; detail: {tasks_detail.task_description}
+                """
+            )
+            result = (
+                SoftwareEngineer(
+                    output_file_name=f"{agent_output}/{tasks_detail['task_name']}"
+                )
+                .crew()
+                .kickoff()
+            )
+        pass
     
 
 def kickoff():

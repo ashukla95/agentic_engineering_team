@@ -1,0 +1,11 @@
+
+
+generate_code:
+  description:  >
+    Generate code for the input task provided.
+    Follow the best practices in software design and
+    provide code that is modular and testable.
+  expected_output:  >
+    Python code that successfully satisfies the 
+    requirements provided as a part of the task.
+  agent:  software_engineer
