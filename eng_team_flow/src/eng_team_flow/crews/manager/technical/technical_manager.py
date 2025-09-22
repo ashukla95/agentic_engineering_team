@@ -70,5 +70,6 @@ class TechnicalManagerCrew:
             tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
-            step_callback=self.track_collaboration_from_manager
+            step_callback=self.track_collaboration_from_manager,
+            memory=True
         )
