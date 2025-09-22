@@ -21,7 +21,8 @@ class BusinessCrew:
     @agent
     def business_personal(self) -> Agent:
         return Agent(
-            config=self.agents_config["business_personal"]
+            config=self.agents_config["business_personal"],
+            allow_delegation=True
         )
     
     @task
@@ -30,6 +31,10 @@ class BusinessCrew:
             config=self.tasks_config["business_usecase_generation_task"],
             output_pydantic=BusinessUseCase
         )
+    
+    def track_collaboration_from_business(self, output):
+        """Track collaboration patterns"""
+        print(f"output from stepcallback: {output}")
 
     @crew
     def crew(self) -> Crew:
@@ -39,4 +44,6 @@ class BusinessCrew:
             tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=True,
+            step_callback=self.track_collaboration_from_business,
+            memory=True
         )

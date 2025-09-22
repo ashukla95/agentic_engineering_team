@@ -2,7 +2,8 @@ from crewai import (
     Agent,
     Crew,
     Process,
-    Task
+    Task,
+    LLM
 )
 from crewai.project import (
     CrewBase,
@@ -40,7 +41,13 @@ class TechLead:
             config=self.agents_config[
                 "tech_lead"
             ],
-            allow_code_execution=False
+            allow_code_execution=False,
+            llm=LLM(
+                model="claude-sonnet-4-20250514",
+                temperature=0,
+                max_tokens=10000000,
+                stream=True
+            )
         )
     
     @task
@@ -58,5 +65,6 @@ class TechLead:
             agents=self.agents,
             tasks=self.tasks,
             process=Process.sequential,
-            verbose=True
+            verbose=True,
+            memory=True
         )

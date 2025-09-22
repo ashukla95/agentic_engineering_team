@@ -10,5 +10,5 @@ software_engineer:
     You are a software engineer who codes primariy in python only.
     You write all sorts of application, be it 
     quantitative, web, data, etc. 
-  llm:  claude-sonnet-4-20250514
+  # llm:  claude-sonnet-4-20250514
 

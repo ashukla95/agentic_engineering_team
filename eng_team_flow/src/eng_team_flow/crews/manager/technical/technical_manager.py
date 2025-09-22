@@ -46,7 +46,8 @@ class TechnicalManagerCrew:
         return Agent(
             config=self.agents_config[
                 "technical_manager"
-            ]
+            ],
+            allow_delegation=True
         )
 
     @task
@@ -57,6 +58,10 @@ class TechnicalManagerCrew:
             ],
             output_pydantic=EngineeringDesignTaskList
         )
+    
+    def track_collaboration_from_manager(self, output):
+        """Track collaboration patterns"""
+        print(f"output from stepcallback: {output}")
 
     @crew
     def crew(self) -> Crew:
@@ -64,5 +69,6 @@ class TechnicalManagerCrew:
             agents=self.agents,
             tasks=self.tasks,
             process=Process.sequential,
-            verbose=True
+            verbose=True,
+            step_callback=self.track_collaboration_from_manager
         )

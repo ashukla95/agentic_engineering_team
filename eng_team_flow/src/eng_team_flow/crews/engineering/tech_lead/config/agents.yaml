@@ -9,4 +9,4 @@ tech_lead:
   backstory: >
    You were a software engineer who now leads the software engineering
    team and your decisions lead how a product functions.
-  llm:  claude-sonnet-4-20250514
+  # llm:  claude-sonnet-4-20250514
