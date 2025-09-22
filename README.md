@@ -1,6 +1,7 @@
 # Software Engineer Team
 
 folder: eng_team_flow
+
 I have implemented a software engineer team using CREWAI Flows. This team consists of 
 one business personal, one technical manager, 1 software engineer and 1 tech lead agents.
 It has a self eval loop between business personal and tech manager wherein tech manager 
@@ -28,6 +29,7 @@ Challenges and findings:
 
 
 folder: eng_team_flow_se_agents_combined
+
 I have implemented a software engineer team using CREWAI Flows. This team consists of 
 one business personal, one technical manager, 1 software engineer, 1 tech lead and 1 code summarizer agents.
 THE MAIN DIFFERENCE FROM THE PREVIOUS ONE IS SOFTWARE ENGINEER, TECH LEAD AND CODE SUMMARIZER ARE ALL THE PART 
